@@ -1,11 +1,22 @@
 public class Main {
     public static void main(String[] args) {
-        Warrior w = new Warrior(10);
-        Wizard z = new Wizard(10);
         Ring r = new Ring();
-        Necklace n = new Necklace();
-        z.EquipAccessories(r);
-        z.EquipAccessories(n);
+        Warrior w = new Warrior(10);
+        w.EquipAccessories(r);
+
+        Wizard z = new Wizard(10);
+        z.EquipAccessories(new Necklace());
+
+        w.printStat();
+        z.printStat();
+
+        System.out.println("Battle!");
+
+        w.attack(z);
+        z.attack(w);
+        w.attack(z);
+
+        w.printStat();
         z.printStat();
     }
 }
