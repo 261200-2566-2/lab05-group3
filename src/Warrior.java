@@ -1,17 +1,19 @@
 public class Warrior implements Character{ // Warrior have advantages over Wizard on ATK and HP
     private int level;
+    private String Name;
     private double maxHp, currentHp, maxMana, currentAtk=15, currentDef=5, currentMana;
 
     /** Create an Object of 'Warrior' Class and set the default field.
      * effects: initialize each character field
      * @param level of character you want to create
      */
-    public Warrior(int level){ // Warrior Constructor | Stats init different from Wizard
+    public Warrior(String name,int level){ // Warrior Constructor | Stats init different from Wizard
         this.level = level;
         maxHp = 100+15*level;
         maxMana = 50+2*level;
         currentHp = maxHp; // Set HP
         currentMana = maxMana; // Set Mana
+        Name = name;
     }
 
     /** Increase currentHp and Reduce currentMana of this Character.
@@ -21,8 +23,12 @@ public class Warrior implements Character{ // Warrior have advantages over Wizar
     public void heal(){
         if(currentMana < 7) System.out.println("You can't // Don't have Enough Mana !"); // No mana to consume
         currentHp += 5;
-        if(currentHp > maxHp) currentHp = maxHp; // Over Max
+        if(currentHp > maxHp) {
+            currentHp = maxHp;
+        } // Over Max
         currentMana -= 7;
+
+        System.out.println(Name + " used heal current HP = "+currentHp);
     }
 
     /** Increase Level of Character by 1 and then update the status.
@@ -36,7 +42,7 @@ public class Warrior implements Character{ // Warrior have advantages over Wizar
 
     /** Attack other Character.
      * effects: The target character get attacked
-      * @param target Character you want to attack
+     * @param target Character you want to attack
      */
     public void attack(Character target){
         target.getAttacked(currentAtk);
@@ -44,11 +50,19 @@ public class Warrior implements Character{ // Warrior have advantages over Wizar
 
     /** Get Attacked by Other Character.
      * effects: Reduce currentHp of this Character
+     * effects: if Character dead print dead message
+     * effects: if Character still alive print current HP
      * @param atk that received from other character
      */
-    public void getAttacked(double atk){
+    public void getAttacked(double atk){ // Damage Reduced Different from Warrior ( More dmg taken than warrior) [ vulnerable]
         currentHp -= atk-0.7*currentDef;
-    } // Different From Wizard (Stronger than Wizard) Damage reduced less than wizard
+        if(currentHp < 0){
+            currentHp = 0;
+            System.out.println("R.I.P " + Name);
+        }else{
+            System.out.println(Name +" HP = " +currentHp);
+        }
+    }// Different From Wizard (Stronger than Wizard) Damage reduced less than wizard
 
     /** Equip the accessories to this Character and acquire its stats.
      * effects: if equip wrong type of accessories print the error message
@@ -56,7 +70,7 @@ public class Warrior implements Character{ // Warrior have advantages over Wizar
      * @param a is Accessories you want to equip
      */
     public void EquipAccessories(Accessories a){ // Warrior can Equip only ring // Can't Equip Necklace
-        if(a.typeCheck() == 1){ // Case Ring
+        if(a instanceof Ring){ // Case Ring
             maxHp += a.getStats(); // Hp stats from Ring
         }else{ // Case Necklace
             System.out.println("<<< You can't Equip Necklace // Only Wizard Can ;) >>>");

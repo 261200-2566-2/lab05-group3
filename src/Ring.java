@@ -14,12 +14,4 @@ public class Ring implements Accessories{ // Ring , Can only equip by Warrior
     public double getStats(){ // get Hp Increased From Ring
         return HpIncreasedFromRing;
     }
-
-    /** Return type of an Accessory
-     * It's necklace so it's return 1
-     * @return 1
-     */
-    public int typeCheck(){ // If 1 It's ring | if 2 It's Necklace
-        return 1;
-    }
 }
