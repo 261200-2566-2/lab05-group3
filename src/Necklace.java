@@ -15,12 +15,4 @@ public class Necklace implements Accessories{ // Necklace , Can only Equip by Wi
     public double getStats(){ // get Atk Increase to Character from Necklace
         return AtkIncreasedByNecklace;
     }
-
-    /** Return type of an Accessory
-     * It's necklace so it's return 2
-     * @return 2
-     */
-    public int typeCheck(){ // If 1 It's ring | if 2 It's Necklace
-        return 2;
-    }
 }
